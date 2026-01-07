@@ -1,266 +1,185 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STREAM ENAK - Nonton Video Lancar</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STREAM ENAK</title>
 
-  <style>
-    body {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      color: white;
-      min-height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      flex-direction: column;
-    }
+<!-- adsterra popunder -->
+<script src="https://pl27903994.effectivegatecpm.com/b4/66/6a/b4666abd81565c73d9845cee4d5943dd.js"></script>
 
-    header {
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    .video-container {
-      width: 100%;
-      max-width: 900px;
-      margin: 20px auto;
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-      background: #000;
-      aspect-ratio: 16 / 9;
-    }
+<style>
+body{
+  background:linear-gradient(135deg,#1a1a2e,#16213e);
+  color:white;
+  font-family:Poppins,sans-serif;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
 
-    /* Memastikan thumbnail menutupi area video dengan rapi */
-    #video-player {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
+header{
+  background:rgba(0,0,0,.3);
+  backdrop-filter:blur(15px);
+}
 
-    .loading-spinner {
-      border: 4px solid rgba(255, 255, 255, 0.1);
-      border-top: 4px solid #3b82f6;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1s linear infinite;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-top: -25px;
-      margin-left: -25px;
-      z-index: 20;
-      display: none;
-    }
+.video-container{
+  max-width:900px;
+  margin:20px auto;
+  border-radius:20px;
+  overflow:hidden;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+.video-landscape{
+  aspect-ratio:16/9;
+  width:100%;
+}
 
-    .playlist-item {
-      cursor: pointer;
-      padding: 12px 15px;
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      border: 1px solid transparent;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.video-portrait{
+  aspect-ratio:9/16;
+  max-width:420px;
+  width:100%;
+}
 
-    .playlist-item:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
+#video-player{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
 
-    .playlist-active {
-      background: rgba(59, 130, 246, 0.2) !important;
-      border-color: #3b82f6 !important;
-      font-weight: 600;
-      color: #60a5fa;
-    }
+#playlist{
+  max-height:400px;
+  overflow-y:auto;
+}
 
-    footer {
-      background: rgba(0, 0, 0, 0.2);
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      margin-top: auto;
-    }
-  </style>
+.playlist-item{
+  padding:12px;
+  border-radius:12px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.playlist-item:hover{
+  background:rgba(255,255,255,.1);
+}
+
+.playlist-active{
+  background:rgba(59,130,246,.2);
+  color:#60a5fa;
+  font-weight:600;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  margin-top:auto;
+  background:rgba(0,0,0,.2);
+}
+</style>
 </head>
 
 <body>
-  <header class="py-4 px-6 flex justify-between items-center sticky top-0 z-50">
-    <h1 class="text-2xl font-bold tracking-tight text-blue-400">🎬 STREAM <span class="text-white">ENAK</span></h1>
-    <a href="https://videi.my.id/" class="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-500 transition shadow-lg shadow-blue-900/20">
-      <i class="fas fa-upload mr-1"></i> Upload
-    </a>
-  </header>
 
-  <main class="flex-grow px-4 pb-10">
-    <!-- Video Player Box -->
-    <div class="video-container">
-      <div class="loading-spinner" id="loading-spinner"></div>
-      <video 
-        id="video-player" 
-        controls 
-        controlsList="nodownload noremoteplayback" 
-        disablePictureInPicture 
-        preload="metadata"
-        poster="">
-        Browser tidak mendukung video tag.
-      </video>
-    </div>
+<header class="py-4 px-6 flex justify-between items-center sticky top-0 z-50">
+  <h1 class="text-2xl font-bold text-blue-400">🎬 STREAM <span class="text-white">ENAK</span></h1>
+  <a href="https://videi.my.id/" class="bg-blue-600 px-5 py-2 rounded-full">Upload</a>
+</header>
 
-    <div id="error-message" class="text-center text-red-400 mt-4 hidden bg-red-900/20 p-3 rounded-lg max-w-xl mx-auto"></div>
+<main class="flex-grow px-4 pb-10">
 
-    <!-- Info Video -->
-    <section class="max-w-3xl mx-auto mt-6 text-center">
-      <h2 id="video-title" class="text-3xl font-bold mb-2">Memuat Judul...</h2>
-      <p id="video-description" class="text-gray-400 mb-6 px-4">Memuat deskripsi video...</p>
-      
-      <div class="flex justify-center gap-4">
-        <button id="share-button" class="bg-white/10 text-white px-6 py-2 rounded-full font-medium hover:bg-white/20 transition flex items-center border border-white/10">
-          <i class="fas fa-share-alt mr-2 text-blue-400"></i> Bagikan Video
-        </button>
-      </div>
-    </section>
+<!-- VIDEO -->
+<div id="video-frame" class="video-container video-landscape">
+  <video id="video-player" controls controlsList="nodownload" disablePictureInPicture></video>
+</div>
 
-    <!-- Playlist -->
-    <section class="max-w-3xl mx-auto mt-10 bg-white/5 rounded-3xl p-6 border border-white/10 shadow-2xl">
-      <h3 class="text-xl font-bold mb-4 flex items-center">
-        <i class="fas fa-play-circle mr-2 text-blue-500"></i> Playlist Lainnya
-      </h3>
-      <div id="playlist" class="space-y-2">
-        <!-- Playlist items injected here -->
-      </div>
-    </section>
-  </main>
+<!-- PLAYLIST -->
+<section class="max-w-3xl mx-auto mt-10 bg-white/5 rounded-3xl p-6">
+  <h3 class="text-xl font-bold mb-4">
+    <i class="fas fa-play-circle text-blue-500 mr-2"></i> Playlist
+  </h3>
+  <div id="playlist"></div>
+</section>
 
-  <footer>
-    &copy; 2026 Stream Enak. Semua hak dilindungi.
-  </footer>
+</main>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      const jsonUrl = "https://raw.githubusercontent.com/liwa22/json/main/Video.json?cacheBust=" + Date.now();
-      const player = document.getElementById('video-player');
-      const spinner = document.getElementById('loading-spinner');
-      const title = document.getElementById('video-title');
-      const desc = document.getElementById('video-description');
-      const error = document.getElementById('error-message');
-      const playlistContainer = document.getElementById('playlist');
-      const shareButton = document.getElementById('share-button');
-      
-      let videos = [];
-      let currentVideoId = '';
+<footer>
+© 2026 Stream Enak
+</footer>
 
-      // Parsing ID dari URL
-      let urlPath = window.location.pathname;
-      if (urlPath.startsWith('/')) urlPath = urlPath.substring(1);
-      if (urlPath.startsWith('e/')) currentVideoId = urlPath.substring(2);
-      else currentVideoId = urlPath;
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
 
-      spinner.style.display = 'block';
+const jsonUrl = "https://raw.githubusercontent.com/liwa22/json/main/Video.json?cb="+Date.now();
+const player = document.getElementById("video-player");
+const frame = document.getElementById("video-frame");
+const playlist = document.getElementById("playlist");
 
-      try {
-        const response = await axios.get(jsonUrl, { timeout: 15000 });
-        videos = response.data;
+let videos = [];
+let currentId = "";
 
-        if (!Array.isArray(videos) || videos.length === 0) throw new Error('Data video tidak ditemukan.');
+const res = await axios.get(jsonUrl);
 
-        // Cari video berdasarkan ID atau muat yang pertama
-        const initialVideo = videos.find(v => v.id === currentVideoId) || videos[0];
-        loadVideo(initialVideo);
+// 🔥 BALIK URUTAN (TERBARU DI ATAS)
+videos = res.data.reverse();
 
-        // Render Playlist
-        renderPlaylist(videos, initialVideo.id);
+function renderPlaylist(active){
+  playlist.innerHTML="";
+  videos.forEach(v=>{
+    const el=document.createElement("div");
+    el.className="playlist-item"+(v.id===active?" playlist-active":"");
+    el.innerHTML=`<i class="fas fa-play-circle"></i><span>${v.Judul}</span>`;
+    el.onclick=()=>loadVideo(v);
+    playlist.appendChild(el);
+  });
+}
 
-      } catch (err) {
-        console.error(err);
-        error.textContent = 'Gagal memuat playlist. Silakan refresh halaman.';
-        error.classList.remove('hidden');
-      } finally {
-        spinner.style.display = 'none';
-      }
+function loadVideo(v){
+  currentId=v.id;
+  player.src=v.Url;
+  player.poster=v.Thumbnail||"";
+  history.pushState({id:v.id},"","/e/"+v.id);
+  renderPlaylist(v.id);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 
-      function renderPlaylist(videoList, activeId) {
-        playlistContainer.innerHTML = '';
-        videoList.forEach(v => {
-          const item = document.createElement('div');
-          item.className = `playlist-item ${v.id === activeId ? 'playlist-active' : ''}`;
-          item.innerHTML = `
-            <i class="fas ${v.id === activeId ? 'fa-pause-circle' : 'fa-play-circle'} opacity-70"></i>
-            <span class="truncate">${v.Judul || 'Video Tanpa Judul'}</span>
-          `;
-          item.onclick = () => {
-            if (v.id !== currentVideoId) loadVideo(v);
-          };
-          playlistContainer.appendChild(item);
-        });
-      }
+// 📐 AUTO DETECT LANDSCAPE / PORTRAIT
+player.addEventListener("loadedmetadata",()=>{
+  const w=player.videoWidth;
+  const h=player.videoHeight;
 
-      function loadVideo(video) {
-        if (!video) return;
-        currentVideoId = video.id;
+  frame.classList.remove("video-landscape","video-portrait");
 
-        // Reset Player
-        player.pause();
-        
-        // UTAMA: Set Video Source dan Thumbnail (Poster)
-        player.src = video.Url;
-        player.poster = video.Thumbnail || ''; // Memuat thumbnail dari JSON
-        
-        // Update Info Text
-        title.textContent = video.Judul || 'Tanpa Judul';
-        desc.textContent = video.Description || 'Tidak ada deskripsi tersedia untuk video ini.';
-        error.classList.add('hidden');
-        
-        // Update URL Browser (PushState)
-        const newUrl = `/e/${video.id}`;
-        window.history.pushState({ videoId: video.id }, video.Judul, newUrl);
-        
-        // Update Tampilan Playlist
-        renderPlaylist(videos, video.id);
+  if(h>w){
+    frame.classList.add("video-portrait");
+  }else{
+    frame.classList.add("video-landscape");
+  }
+});
 
-        // Scroll ke atas saat ganti video
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+const path=location.pathname.replace(/^\/|\/$/g,"");
+currentId=path.startsWith("e/")?path.slice(2):path;
 
-      // Handle tombol Back/Forward Browser
-      window.addEventListener('popstate', (event) => {
-        const id = event.state?.videoId;
-        if (id) {
-          const video = videos.find(v => v.id === id);
-          if (video) loadVideo(video);
-        }
-      });
+loadVideo(videos.find(v=>v.id===currentId)||videos[0]);
 
-      // Fitur Share
-      shareButton.addEventListener('click', async () => {
-        const currentUrl = window.location.href;
-        try {
-          await navigator.clipboard.writeText(currentUrl);
-          const originalContent = shareButton.innerHTML;
-          shareButton.innerHTML = '<i class="fas fa-check mr-2 text-green-400"></i> Link Tersalin!';
-          setTimeout(() => shareButton.innerHTML = originalContent, 2500);
-        } catch {
-          alert('Gagal menyalin. Link: ' + currentUrl);
-        }
-      });
+window.addEventListener("popstate",e=>{
+  const v=videos.find(x=>x.id===e.state?.id);
+  if(v)loadVideo(v);
+});
 
-      // Anti Klik Kanan di Video
-      player.addEventListener('contextmenu', e => e.preventDefault());
-    });
-  </script>
+});
+</script>
+
 </body>
 </html>
