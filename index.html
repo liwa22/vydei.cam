@@ -3,34 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="monetag" content="396afa41e0e30f1aa2d99ffbbd4fb65c">
 
-  <!-- popunder -->
-<script>(function(s){s.dataset.zone='10470842',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<script>(function(s){s.dataset.zone='10602128',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
   
-  <title>STREAM ENAK</title>
+  
+  <title>CDN VIDEY</title>
+
   <script type="text/javascript">
-      (function (l) {
-        if (l.hash && l.hash.startsWith('#/')) {
-          const newPath = l.hash.replace('#', '');
-          window.location.replace(newPath);
-        }
-        if (l.search[1] === "/") {
-          var decoded = l.search
-            .slice(1)
-            .split("&")
-            .map(function (s) {
-              return s.replace(/~and~/g, "&");
-            })
-            .join("?");
-          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
-        }
-      })(window.location);
+    (function (l) {
+      if (l.hash && l.hash.startsWith('#/')) {
+        const newPath = l.hash.replace('#', '');
+        window.location.replace(newPath);
+      }
+      if (l.search[1] === "/") {
+        var decoded = l.search
+          .slice(1)
+          .split("&")
+          .map(function (s) {
+            return s.replace(/~and~/g, "&");
+          })
+          .join("?");
+        window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+      }
+    })(window.location);
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
   <style>
     html, body {
       height: 100%;
@@ -39,32 +40,39 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      background-color: #000;
+      color: #fff;
     }
+
     main {
       flex: 1 0 auto;
     }
+
     footer {
       flex-shrink: 0;
     }
+
     #video-container {
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
       position: relative;
-      border-radius: 0px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      background-color: #f0f0f0;
+      background-color: #111;
+      box-shadow: 0 4px 20px rgba(255,255,255,0.05);
     }
+
     #video-player {
       width: 100%;
       height: auto;
       display: block;
       object-fit: contain;
+      background-color: #000;
     }
+
     .loading-spinner {
-      border: 4px solid rgba(0, 0, 0, 0.3);
-      border-top: 4px solid #000000;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      border-top: 4px solid #ffffff;
       border-radius: 50%;
       width: 40px;
       height: 40px;
@@ -76,40 +84,26 @@
       z-index: 20;
       display: none;
     }
+
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
     #error-message {
       display: none;
-      color: red;
+      color: #ff4d4d;
       text-align: center;
       margin-top: 20px;
     }
-    .upload-button {
-      background-color: #e5e7eb; /* bg-gray-200 */
-      border-radius: 30px; /* Setengah bulat */
-      padding: 7px 10px; /* Padding untuk membuat kotak */
-      display: inline-flex;
-      align-items: center;
-      font-weight: 500; /* Membuat tulisan Upload sedikit lebih tebal */
-      transition: background-color 0.2s, color 0.2s; /* Efek transisi untuk hover */
-    }
-    .upload-button:hover {
-      background-color: #d1d5db; /* bg-gray-300 untuk hover */
-      color: #4b5563; /* text-gray-600 untuk hover */
-    }
   </style>
 </head>
-<body class="bg-white text-black font-sans">
-  <header class="bg-white pt-2 pb-0 px-6">
+
+<body class="font-sans">
+
+  <header class="bg-black pt-3 pb-2 px-6 border-b border-gray-800">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-black">STREAM ENAK</h1>
-      <nav>
-        <a href="https://videi.my.id/" class="mx-2 text-black upload-button">
-          <i class="fas fa-upload mr-1"></i> Upload
-        </a>
-      </nav>
+      <h1 class="text-2xl font-bold text-white">CDN VIDEY</h1>
     </div>
   </header>
 
@@ -125,101 +119,31 @@
         Your browser does not support the video tag.
       </video>
     </div>
+
     <div id="error-message" class="max-w-7xl mx-auto px-6"></div>
 
     <section class="max-w-7xl mx-auto mt-8 px-6">
-      <h2 id="video-title" class="text-3xl font-bold mb-4 text-black">Judul Video</h2>
-      <p id="video-description" class="text-gray-700 mb-6">Deskripsi video akan muncul di sini.</p>
-
-      <div class="flex items-center mb-6">
-        <div class="flex text-yellow-400 mr-4">
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-          <span class="ml-2 text-black">5.5</span>
-        </div>
-        <span class="text-gray-600 mr-4"><i class="fas fa-eye mr-1"></i> 1,2M Views</span>
-        <button id="share-button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"><i class="fas fa-share-alt mr-1"></i> Share</button>
-      </div>
+      <h2 id="video-title" class="text-3xl font-bold mb-4 text-white">
+        Judul Video
+      </h2>
+      <p id="video-description" class="text-gray-300 mb-6">
+        Deskripsi video akan muncul di sini.
+      </p>
     </section>
   </main>
 
-  <footer class="bg-white py-4 px-6 text-center text-black">
-    &copy; 2026 Videy. All rights reserved.
+  <footer class="bg-black py-4 px-6 text-center text-gray-400 border-t border-gray-800">
+    &copy; CDN VIDEY
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      let urlPath = window.location.pathname;
-      let videoId = '';
-
-      if (urlPath.startsWith('/')) {
-        urlPath = urlPath.substring(1);
-      }
-      if (urlPath.startsWith('e/')) {
-        videoId = urlPath.substring(2);
-      } else {
-        videoId = urlPath;
-      }
-
-      const videoPlayer = document.getElementById('video-player');
-      const videoTitle = document.getElementById('video-title');
-      const videoDescription = document.getElementById('video-description');
-      const loadingSpinner = document.getElementById('loading-spinner');
-      const errorMessage = document.getElementById('error-message');
-      const shareButton = document.getElementById('share-button');
-
-      if (!videoId) {
-        errorMessage.textContent = 'ID video tidak ditemukan di URL.';
-        errorMessage.style.display = 'block';
-        return;
-      }
-
-      loadingSpinner.style.display = 'block';
-
-      try {
-        const response = await axios.get('https://raw.githubusercontent.com/liwa22/json/refs/heads/main/Video.json', { timeout: 10000 });
-        const videos = response.data;
-        const foundVideo = videos.find(video => video.id === videoId);
-
-        if (foundVideo) {
-          videoPlayer.src = foundVideo.Url;
-          videoTitle.textContent = foundVideo.Judul || 'Untitled Video';
-          videoDescription.textContent = foundVideo.Description || 'No description available.';
-
-          videoPlayer.addEventListener('error', () => {
-            errorMessage.textContent = 'Error memutar video. Periksa koneksi atau format video.';
-            errorMessage.style.display = 'block';
-          });
-
-          console.log(`Memuat video: ${foundVideo.Judul} - ${foundVideo.Url}`);
-        } else {
-          errorMessage.textContent = `Video dengan ID ${videoId} tidak ditemukan.`;
-          errorMessage.style.display = 'block';
-        }
-      } catch (error) {
-        errorMessage.textContent = 'Error mengambil data video. Periksa URL JSON atau koneksi internet.';
-        errorMessage.style.display = 'block';
-      } finally {
-        loadingSpinner.style.display = 'none';
-      }
-
-      shareButton.addEventListener('click', async () => {
-        const currentUrl = window.location.href;
-        try {
-          await navigator.clipboard.writeText(currentUrl);
-          const originalText = shareButton.innerHTML;
-          shareButton.innerHTML = '<i class="fas fa-check mr-1"></i> Copied!';
-          setTimeout(() => { shareButton.innerHTML = originalText; }, 2000);
-        } catch {
-          alert('Gagal menyalin link. Salin manual: ' + currentUrl);
-        }
-      });
-    });
+    const _0x216070=_0xa483;function _0xa483(t,e){t-=105;return _0x5be4()[t]}function _0x5be4(){const t=["ZIPAP","loading-sp","QxvER","7570ivkdyG","https://ra","ZqeUr","error","inner","getElement","HnvXA","VGOVp","747432ofjShS","ById","style","video-titl","substring","3290791uNrkaF","DOMContent","tar video.","/heads/mai","No descrip","Url","age","ription","/json/refs","66VDIAlx","able.","video-desc","addEventLi","error-mess","data","OWOpk","454802fZBCGy"," video.","Gagal meng","Video deng","w.githubus","emukan.","1625652BzDbNv","Error memu","ukan di UR","Untitled V","VBBtJ","stener","ercontent.","1409721RoBVor"," tidak dit","1529230KMyxOO","Descriptio","apLsm","none","XSDNH","oIeGy","8LfRLWY","video-play","tion avail","fDrId","ideo","sIblP","pathname","location","idak ditem","find","src","Judul","1764noQkBf","get","textConten","block","startsWith","Loaded","cVnUs","com/liwa22","ambil data","an ID ","2tQtaLI","display","ID video t","LPspw","n/Video.js"];return(_0x5be4=function(){return t})()}(function(){const t=_0xa483,e=_0x5be4();for(;;)try{if(349660===parseInt(t(169))/1+-parseInt(t(132))/2*(-parseInt(t(182))/3)+parseInt(t(148))/4+-parseInt(t(140))/5*(-parseInt(t(122))/6)+-parseInt(t(153))/7+parseInt(t(110))/8*(parseInt(t(175))/9)+parseInt(t(184))/10*(-parseInt(t(162))/11))break;e.push(e.shift())}catch(t){e.push(e.shift())}})(),document[_0x216070(165)+_0x216070(180)](_0x216070(154)+_0x216070(127),async()=>{const t=_0x216070,e={VGOVp:t(176)+t(155),sIblP:t(125),XSDNH:t(111)+"er",LPspw:t(151)+"e",QxvER:t(164)+t(160),HnvXA:t(138)+t(144),cVnUs:t(166)+t(159),ZqeUr:t(134)+t(118)+t(177)+"L.",fDrId:t(141)+t(173)+t(181)+t(129)+t(161)+t(156)+t(136)+"on",OWOpk:t(178)+t(114),apLsm:t(157)+t(112)+t(163),VBBtJ:t(143),oIeGy:t(171)+t(130)+t(170),ZIPAP:t(107)};let n=window[t(117)][t(116)],a="";n[t(126)]("/")&&(n=n[t(152)](1)),a=n[t(126)]("e/")?n[t(152)](2):n;const o=document[t(145)+t(149)](e[t(108)]),r=document[t(145)+t(149)](e[t(135)]),s=document[t(145)+t(149)](e[t(139)]),i=document[t(145)+t(149)](e[t(146)]),d=document[t(145)+t(149)](e[t(128)]);if(!a)return d[t(124)+"t"]=e[t(142)],void(d[t(150)][t(133)]=e[t(115)]);i[t(150)][t(133)]=e[t(115)];try{const n=await axios[t(123)](e[t(113)],{timeout:1e4}),i=n[t(167)][t(119)](t=>t.id===a);i?(o[t(120)]=i[t(158)],r[t(124)+"t"]=i[t(121)]||e[t(168)],s[t(124)+"t"]=i[t(105)+"n"]||e[t(106)],o[t(165)+t(180)](e[t(179)],()=>{const n=t;d[n(124)+"t"]=e[n(147)],d[n(150)][n(133)]=e[n(115)]})):(d[t(124)+"t"]=t(172)+t(131)+a+(t(183)+t(174)),d[t(150)][t(133)]=e[t(115)])}catch(n){d[t(124)+"t"]=e[t(109)],d[t(150)][t(133)]=e[t(115)]}finally{i[t(150)][t(133)]=e[t(137)]}});
   </script>
 
   <script>
-    // Disable klik kanan pada video
     const videoPlayer = document.getElementById('video-player');
     videoPlayer.addEventListener('contextmenu', e => e.preventDefault());
   </script>
+
 </body>
 </html>
