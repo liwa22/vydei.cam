@@ -1,90 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<script>(function(s){s.dataset.zone='10602128',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-  
-  
-  <title>CDN VIDEY</title>
-
-  <script type="text/javascript">
-    (function (l) {
-      if (l.hash && l.hash.startsWith('#/')) {
-        const newPath = l.hash.replace('#', '');
-        window.location.replace(newPath);
-      }
-      if (l.search[1] === "/") {
-        var decoded = l.search
-          .slice(1)
-          .split("&")
-          .map(function (s) {
-            return s.replace(/~and~/g, "&");
-          })
-          .join("?");
-        window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
-      }
-    })(window.location);
-  </script>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background-color: #000;
-      color: #fff;
-    }
-
-    main {
-      flex: 1 0 auto;
-    }
-
-    footer {
-      flex-shrink: 0;
-    }
-
-    #video-container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      overflow: hidden;
-      background-color: #111;
-      box-shadow: 0 4px 20px rgba(255,255,255,0.05);
-    }
-
-    #video-player {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: contain;
-      background-color: #000;
-    }
-
-    .loading-spinner {
-      border: 4px solid rgba(255, 255, 255, 0.2);
-      border-top: 4px solid #ffffff;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 20;
-      display: none;
-    }
-<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -145,13 +59,14 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    #video-player {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      display: block;
-      outline: none;
-      background-color: #000;
-    }
+ #video-player {
+  width: 100%;
+  display: block;
+  outline: none;
+  background-color: #000;
+  object-fit: contain;
+  max-height: 90vh;
+}
 
     .loading-spinner {
       border: 3px solid rgba(255, 255, 255, 0.1);
@@ -281,7 +196,20 @@
           videoTitle.textContent = foundVideo.Judul || 'Untitled Video';
           videoDescription.textContent = foundVideo.Description || 'Tidak ada deskripsi.';
           videoPlayer.load();
+videoPlayer.addEventListener('loadedmetadata', () => {
+  const videoContainer = document.getElementById('video-container');
+  const ratio = videoPlayer.videoWidth / videoPlayer.videoHeight;
 
+  if (ratio < 1) {
+    // VIDEO PORTRAIT
+    videoContainer.style.maxWidth = "500px";
+    videoContainer.style.height = "90vh";
+  } else {
+    // VIDEO LANDSCAPE
+    videoContainer.style.maxWidth = "1100px";
+    videoContainer.style.height = "auto";
+  }
+});
           downloadButton.addEventListener('click', () => {
             window.location.href = currentVideoUrl;
           });
