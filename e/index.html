@@ -59,13 +59,14 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    #video-player {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      display: block;
-      outline: none;
-      background-color: #000;
-    }
+ #video-player {
+  width: 100%;
+  display: block;
+  outline: none;
+  background-color: #000;
+  object-fit: contain;
+  max-height: 90vh;
+}
 
     .loading-spinner {
       border: 3px solid rgba(255, 255, 255, 0.1);
@@ -195,7 +196,20 @@
           videoTitle.textContent = foundVideo.Judul || 'Untitled Video';
           videoDescription.textContent = foundVideo.Description || 'Tidak ada deskripsi.';
           videoPlayer.load();
+videoPlayer.addEventListener('loadedmetadata', () => {
+  const videoContainer = document.getElementById('video-container');
+  const ratio = videoPlayer.videoWidth / videoPlayer.videoHeight;
 
+  if (ratio < 1) {
+    // VIDEO PORTRAIT
+    videoContainer.style.maxWidth = "500px";
+    videoContainer.style.height = "90vh";
+  } else {
+    // VIDEO LANDSCAPE
+    videoContainer.style.maxWidth = "1100px";
+    videoContainer.style.height = "auto";
+  }
+});
           downloadButton.addEventListener('click', () => {
             window.location.href = currentVideoUrl;
           });
