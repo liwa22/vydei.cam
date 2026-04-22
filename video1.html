@@ -1,34 +1,19 @@
-<!DOCTYPE html>
-<html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Video Fix</title>
+<title>Video Streaming</title>
+
+<!-- OPEN GRAPH -->
+<meta property="og:title" content="Video Streaming">
+<meta property="og:description" content="Streaming langsung dari CDN">
+<meta property="og:type" content="website">
+
+<!-- WAJIB ADA GAMBAR -->
+<meta property="og:image" content="https://via.placeholder.com/1280x720.png?text=Video+Preview">
+
+<!-- TWITTER -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Video Streaming">
+<meta name="twitter:description" content="Streaming langsung dari CDN">
+<meta name="twitter:image" content="https://via.placeholder.com/1280x720.png?text=Video+Preview">
+
 </head>
-
-<body style="margin:0;background:black;">
-
-<video id="v" controls autoplay muted playsinline style="width:100%;height:100vh;"></video>
-
-<script>
-const videoUrl = "https://cdn.videy.co/iLd8SPqf1.mp4"; // ganti punyamu
-
-const v = document.getElementById("v");
-
-// coba cara 1
-v.src = videoUrl;
-
-// fallback kalau gagal
-v.onerror = () => {
-  document.body.innerHTML = `
-    <h2 style="color:white;text-align:center">Gagal load video langsung</h2>
-    <p style="color:white;text-align:center">
-      <a href="${videoUrl}" target="_blank" style="color:cyan">
-        Buka video langsung
-      </a>
-    </p>
-  `;
-};
-</script>
-
-</body>
-</html>
