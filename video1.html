@@ -2,28 +2,33 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Video Streaming 1</title>
-
-<!-- WAJIB untuk Twitter -->
-<meta property="og:title" content="Video Streaming 1">
-<meta property="og:description" content="Streaming dari CDN Videy 1">
-<meta property="og:type" content="video.other">
-
-<!-- fallback image (WAJIB walaupun kamu tidak punya thumbnail) -->
-<meta property="og:image" content="https://via.placeholder.com/1280x720.png?text=Video">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Video Streaming 1">
-<meta name="twitter:description" content="Streaming dari CDN Videy 1">
-<meta name="twitter:image" content="https://via.placeholder.com/1280x720.png?text=Video">
-
+<title>Video Fix</title>
 </head>
 
 <body style="margin:0;background:black;">
 
-<video controls autoplay style="width:100%;height:100vh;">
-  <source src="https://cdn.videy.co/video1.mp4" type="video/mp4">
-</video>
+<video id="v" controls autoplay muted playsinline style="width:100%;height:100vh;"></video>
+
+<script>
+const videoUrl = "https://cdn.videy.co/video1.mp4"; // ganti punyamu
+
+const v = document.getElementById("v");
+
+// coba cara 1
+v.src = videoUrl;
+
+// fallback kalau gagal
+v.onerror = () => {
+  document.body.innerHTML = `
+    <h2 style="color:white;text-align:center">Gagal load video langsung</h2>
+    <p style="color:white;text-align:center">
+      <a href="${videoUrl}" target="_blank" style="color:cyan">
+        Buka video langsung
+      </a>
+    </p>
+  `;
+};
+</script>
 
 </body>
 </html>
