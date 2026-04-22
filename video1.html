@@ -1,13 +1,15 @@
+<!DOCTYPE html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Video Streaming</title>
 
-<!-- OPEN GRAPH -->
+<!-- OPEN GRAPH (UNTUK PREVIEW) -->
 <meta property="og:title" content="Video Streaming">
 <meta property="og:description" content="Streaming langsung dari CDN">
 <meta property="og:type" content="website">
-
-<!-- WAJIB ADA GAMBAR -->
 <meta property="og:image" content="https://via.placeholder.com/1280x720.png?text=Video+Preview">
 
 <!-- TWITTER -->
@@ -16,4 +18,24 @@
 <meta name="twitter:description" content="Streaming langsung dari CDN">
 <meta name="twitter:image" content="https://via.placeholder.com/1280x720.png?text=Video+Preview">
 
+<style>
+body {
+  margin: 0;
+  background: black;
+}
+video {
+  width: 100%;
+  height: 100vh;
+}
+</style>
+
 </head>
+
+<body>
+
+<video controls autoplay muted playsinline>
+  <source src="https://cdn.videy.co/video1.mp4" type="video/mp4">
+</video>
+
+</body>
+</html>
