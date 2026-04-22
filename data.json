@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "video1",
+    "title": "Video Streaming 1",
+    "description": "Streaming dari CDN Videy 1",
+    "video": "https://cdn.videy.co/iLd8SPqf1.mp4"
+  },
+  {
+    "slug": "video2",
+    "title": "Video Streaming 2",
+    "description": "Streaming dari CDN Videy 2",
+    "video": "https://cdn.videy.co/iLd8SPqf1.mp4"
+  }
+]
